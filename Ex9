@@ -1,0 +1,68 @@
+class Car:
+    """A class that represents a car.
+
+    Attributes:
+        x (int): The x-coordinate of the car's position.
+        y (int): The y-coordinate of the car's position.
+        heading (str): The direction the car is facing ('n' for north, 'e' for east,
+            's' for south, 'w' for west)."""
+
+    def __init__(self):
+        """Initialize the Car object with starting values."""
+        self.x = 0
+        self.y = 0
+        self.heading = "n"
+
+    def turn(self, direction):
+        """Change the heading of the car based on the direction parameter.
+
+        Args:
+            direction (str): Either 'l' for left or 'r' for right.
+
+        Side Effects:
+            Modifies the value of the heading attribute.
+        """
+        if direction == "l":
+            if self.heading == "n":
+                self.heading = "w"
+            elif self.heading == "w":
+                self.heading = "s"
+            elif self.heading == "s":
+                self.heading = "e"
+            elif self.heading == "e":
+                self.heading = "n"
+        elif direction == "r":
+            if self.heading == "n":
+                self.heading = "e"
+            elif self.heading == "e":
+                self.heading = "s"
+            elif self.heading == "s":
+                self.heading = "w"
+            elif self.heading == "w":
+                self.heading = "n"
+            else:
+                raise ValueError("Invalid direction. Use 'l' for left or 'r' for right.")
+
+    def drive(self, distance=1):
+        """Move the car in the current heading direction for the given distance.
+
+        Args:
+            distance (int): The distance to drive. Default is 1.
+
+        Side Effects:
+            Modifies the values of the x or y attributes.
+        """
+        if self.heading == "n":
+            self.y += distance
+        elif self.heading == "e":
+            self.x += distance
+        elif self.heading == "s":
+            self.y -= distance
+        elif self.heading == "w":
+            self.x -= distance
+
+    def status(self):
+        """Print the current position and heading of the car."""
+        print(f"Coordinates: ({self.x}, {self.y})")
+        print(f"Heading: {self.heading}")
+
